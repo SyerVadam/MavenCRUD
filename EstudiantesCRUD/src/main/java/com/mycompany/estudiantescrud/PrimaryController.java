@@ -103,9 +103,12 @@ public class PrimaryController implements Initializable{
 
     @FXML
     private void btnEliminar_Click(ActionEvent event) {
-        EstudiantePOJO estudiante = new EstudiantePOJO();
         if(listvEstudiantes.getSelectionModel().getSelectedItem()!=null){
+            EstudiantePOJO estudiante = new EstudiantePOJO();
             estudiante = listvEstudiantes.getSelectionModel().getSelectedItem();
+            
+            BaseDeDatos bd = new BaseDeDatos();
+            bd.EliminarEstudiante(estudiante.getIdEstudiante());
             
             actualizarListaEstudiantes();
         }else{

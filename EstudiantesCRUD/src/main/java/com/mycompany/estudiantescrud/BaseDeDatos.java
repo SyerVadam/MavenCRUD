@@ -45,7 +45,7 @@ public class BaseDeDatos {
                     e.setApellidoMaterno(rs.getString("apellidoMaterno"));
                     listaEstudiantes.add(e);
                 }
-                
+
                 rs.close();
                 ps.close();
                 conn.close();
@@ -103,6 +103,23 @@ public class BaseDeDatos {
 
         } catch (SQLException e) {
             System.out.println("Error de actualización en la base de datos: " + e.getMessage());
+        }
+    }
+
+    public void EliminarEstudiante(int idEstudiante) {
+        String consulta;
+        try {
+            Connection conn = ConectarBD();
+            if (conn != null) {
+                consulta = "DELETE FROM estudiantes WHERE idEstudiante = " + idEstudiante;
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.executeUpdate();
+                
+                ps.close();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error de eliminación en la base de datos: " + e.getMessage());
         }
     }
 }

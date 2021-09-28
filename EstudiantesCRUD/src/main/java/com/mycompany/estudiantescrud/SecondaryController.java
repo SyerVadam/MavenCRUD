@@ -29,12 +29,17 @@ public class SecondaryController implements Initializable{
     @FXML
     private Button btnGuardar;
 
+    public boolean esNuevoRegistro = true;
+    EstudiantePOJO estudianteExistente;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        estudianteExistente = new EstudiantePOJO();
     }   
     
     public void recibirEstudianteActualización(EstudiantePOJO estudiante){
+        esNuevoRegistro = false;
+        estudianteExistente = estudiante;
         this.txfPrimerNombre.setText(estudiante.getPrimerNombre());
         this.txfSegundoNombre.setText(estudiante.getSegundoNombre());
         this.txfApellidoPaterno.setText(estudiante.getApellidoPaterno());
@@ -44,6 +49,22 @@ public class SecondaryController implements Initializable{
 
     @FXML
     private void btnGuardar_Click(ActionEvent event) {
+        String primerNombre = this.txfPrimerNombre.getText();
+        String segundoNombre = this.txfSegundoNombre.getText();
+        String apellidoPaterno = this.txfApellidoPaterno.getText();
+        String apellidoMaterno = this.txfApellidoMaterno.getText();
+        
+        if(primerNombre.isEmpty() || apellidoPaterno.isEmpty()){
+            System.out.println("Verifique que no haya campos vacíos");
+        }else{
+            BaseDeDatos bd = new BaseDeDatos();
+            if(esNuevoRegistro){
+                bd.RegistrarEstudiante(primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+            }else{
+                bd.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+            }
+                
+        }
     }
 
     @FXML

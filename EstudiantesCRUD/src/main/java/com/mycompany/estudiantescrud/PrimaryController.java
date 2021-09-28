@@ -39,8 +39,6 @@ public class PrimaryController implements Initializable{
     private Button btnEliminar;
     @FXML
     private TextField txfEstudiante;
-
-    private ObservableList<EstudiantePOJO> estudiantes;
     @FXML
     private Button btnSalir;
     
@@ -48,12 +46,13 @@ public class PrimaryController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listvEstudiantes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        estudiantes = FXCollections.observableArrayList();
+
         actualizarListaEstudiantes();
     }   
     
     private void actualizarListaEstudiantes(){
-        
+        BaseDeDatos bd = new BaseDeDatos();
+        this.listvEstudiantes.setItems(bd.ObtenerEstudiantes());
     }
    
     @FXML
@@ -128,7 +127,9 @@ public class PrimaryController implements Initializable{
     @FXML
     private void btnProbarConexion_Click(ActionEvent event) throws SQLException {
         BaseDeDatos bd = new BaseDeDatos();
-        bd.ConectarBD();
+        Connection conn = bd.ConectarBD();
+        if(conn != null)
+            System.out.println("Conexión establecida");
     }
 
 

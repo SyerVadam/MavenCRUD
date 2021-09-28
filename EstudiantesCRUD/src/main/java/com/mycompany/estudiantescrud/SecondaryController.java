@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import pojo.EstudiantePOJO;
 
 public class SecondaryController implements Initializable{
 
@@ -23,14 +25,30 @@ public class SecondaryController implements Initializable{
     @FXML
     private ComboBox<?> cmbAprobacion;
     @FXML
-    private Button btn;
+    private Button btnCancelar;
+    @FXML
+    private Button btnGuardar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }   
+    
+    public void recibirEstudianteActualización(EstudiantePOJO estudiante){
+        this.txfPrimerNombre.setText(estudiante.getPrimerNombre());
+        this.txfSegundoNombre.setText(estudiante.getSegundoNombre());
+        this.txfApellidoPaterno.setText(estudiante.getApellidoPaterno());
+        this.txfApellidoMaterno.setText(estudiante.getApellidoMaterno());
+    }
+
 
     @FXML
-    private void btn_Click(ActionEvent event) {
+    private void btnGuardar_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnCancelar_Click(ActionEvent event) {
+        Stage stage = (Stage) btnCancelar.getScene().getWindow();
+        stage.close();
     }
 }

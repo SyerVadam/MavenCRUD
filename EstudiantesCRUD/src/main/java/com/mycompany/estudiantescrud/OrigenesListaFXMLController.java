@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
@@ -47,11 +49,13 @@ public class OrigenesListaFXMLController implements Initializable {
     private Label lblPruebaSQL;
     @FXML
     private Button btnRegistrar;
+    @FXML
+    private Button btnBuscar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listvOrigenes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
+        
         actualizarListaOrigenes();
     }
     
@@ -102,15 +106,19 @@ public class OrigenesListaFXMLController implements Initializable {
 
     @FXML
     private void btnEliminar_Click(ActionEvent event) {
-        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminarlo?");
-        
         if (listvOrigenes.getSelectionModel().getSelectedItem() != null) {
             OrigenPOJO origen = new OrigenPOJO();
             origen = listvOrigenes.getSelectionModel().getSelectedItem();
 
-            if(confirmacion == 0){
-                OrigenDAO origenDAO = new OrigenDAO();
+            OrigenDAO origenDAO = new OrigenDAO();
+            boolean tieneEstudiantes = origenDAO.TieneEstudiantes(origen.getIdOrigen());
+            
+            int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminarlo?");
+            
+            if(confirmacion == 0 && !tieneEstudiantes){
                 origenDAO.EliminarOrigen(origen.getIdOrigen());
+            }else if(tieneEstudiantes){
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el origen por que tiene estudiantes asignados");
             }
 
             actualizarListaOrigenes();
@@ -119,9 +127,6 @@ public class OrigenesListaFXMLController implements Initializable {
         }
     }
 
-    @FXML
-    private void txfBuscarEstudiante_TextChanged(InputMethodEvent event) {
-    }
 
     @FXML
     private void btnRegresar_Click(ActionEvent event) throws IOException {
@@ -136,5 +141,10 @@ public class OrigenesListaFXMLController implements Initializable {
         stageActual.close();
         stage.show();
     }
-    
+
+    @FXML
+    private void btnBuscar_Click(ActionEvent event) {
+        OrigenDAO origenDAO = new OrigenDAO();
+        this.listvOrigenes.setItems(origenDAO.ObtenerOrigenesPorEstado(txfOrigen.getText()));
+    } 
 }

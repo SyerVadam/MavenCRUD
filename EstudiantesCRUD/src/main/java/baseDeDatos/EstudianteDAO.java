@@ -54,19 +54,19 @@ public class EstudianteDAO {
         return listaEstudiantes;
     }
 
-    public void RegistrarEstudiante(String primerNombre, String segundoNombre, String apellidoPaterno, String apellidoMaterno) {
+    public void RegistrarEstudiante(String primer_nom, String primer_ape, String seg_nom, String seg_ape) {
         String consulta;
 
         try {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "INSERT INTO estudiantes (primerNombre, segundoNombre, primerApellido, segundoApellido) VALUES (?, ?, ?, ?)";
-                PreparedStatement ps = conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, primerNombre);
-                ps.setString(2, segundoNombre);
-                ps.setString(3, apellidoPaterno);
-                ps.setString(4, apellidoMaterno);
+                consulta = "INSERT INTO estudiante (primer_nom, primer_ape, seg_nom, seg_ape) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setString(1, primer_nom);
+                ps.setString(2, primer_ape);
+                ps.setString(3, seg_nom);
+                ps.setString(4, seg_ape);
 
                 ps.executeUpdate();
                 ps.close();
@@ -78,19 +78,19 @@ public class EstudianteDAO {
         }
     }
 
-    public void ActualizarEstudiante(int idEstudiante, String primerNombre, String segundoNombre, String apellidoPaterno, String apellidoMaterno) {
+    public void ActualizarEstudiante(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String seg_ape) {
         String consulta;
 
         try {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "UPDATE estudiantes SET primerNombre=?, segundoNombre=?, apellidoPaterno=?, apellidoMaterno=? WHERE idEstudiante = " + idEstudiante;
-                PreparedStatement ps = conn.prepareStatement(consulta, Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, primerNombre);
-                ps.setString(2, segundoNombre);
-                ps.setString(3, apellidoPaterno);
-                ps.setString(4, apellidoMaterno);
+                consulta = "UPDATE estudiantes SET primer_nom=?, primer_ape=?, seg_nom=?, seg_ape=? WHERE idestudiante = " + idEstudiante;
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setString(1, primer_nom);
+                ps.setString(2, primer_ape);
+                ps.setString(3, seg_nom);
+                ps.setString(4, seg_ape);
 
                 ps.executeUpdate();
                 ps.close();
@@ -107,7 +107,7 @@ public class EstudianteDAO {
         try {
             Connection conn = ConectarBD();
             if (conn != null) {
-                consulta = "DELETE FROM estudiantes WHERE idEstudiante = " + idEstudiante;
+                consulta = "DELETE FROM estudiante WHERE idestudiante = " + idEstudiante;
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.executeUpdate();
                 

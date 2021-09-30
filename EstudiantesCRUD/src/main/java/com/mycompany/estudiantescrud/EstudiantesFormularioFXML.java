@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -24,14 +25,20 @@ public class EstudiantesFormularioFXML implements Initializable{
     @FXML
     private TextField txfApellidoPaterno;
     @FXML
-    private ComboBox<?> cmbAprobacion;
-    @FXML
     private Button btnCancelar;
     @FXML
     private Button btnGuardar;
 
     public boolean esNuevoRegistro = true;
     EstudiantePOJO estudianteExistente;
+    @FXML
+    private ComboBox<?> cmbColegio;
+    @FXML
+    private TextField txfHistorial;
+    @FXML
+    private CheckBox chkbEstaActivo;
+    @FXML
+    private ComboBox<?> cmbOrigen;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,19 +57,19 @@ public class EstudiantesFormularioFXML implements Initializable{
 
     @FXML
     private void btnGuardar_Click(ActionEvent event) {
-        String primerNombre = this.txfPrimerNombre.getText();
-        String segundoNombre = this.txfSegundoNombre.getText();
-        String apellidoPaterno = this.txfApellidoPaterno.getText();
-        String apellidoMaterno = this.txfApellidoMaterno.getText();
+        String primer_nom = this.txfPrimerNombre.getText();
+        String seg_nom = this.txfSegundoNombre.getText();
+        String primer_ape = this.txfApellidoPaterno.getText();
+        String seg_ape = this.txfApellidoMaterno.getText();
         
-        if(primerNombre.isEmpty() || apellidoPaterno.isEmpty()){
+        if(primer_nom.isEmpty() || primer_ape.isEmpty()){
             System.out.println("Verifique que no haya campos vacíos");
         }else{
             EstudianteDAO estudianteDAO= new EstudianteDAO();
             if(esNuevoRegistro){
-                estudianteDAO.RegistrarEstudiante(primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+                estudianteDAO.RegistrarEstudiante(primer_nom, primer_ape, seg_nom, seg_ape);
             }else{
-                estudianteDAO.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+                estudianteDAO.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primer_nom, primer_ape, seg_nom, seg_ape);
             }
                 
         }

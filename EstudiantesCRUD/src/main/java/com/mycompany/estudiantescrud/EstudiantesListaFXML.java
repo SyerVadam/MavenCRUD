@@ -59,6 +59,7 @@ public class EstudiantesListaFXML implements Initializable {
 
     @FXML
     private void listvEstudiantes_OnDragEntered(DragEvent event) {
+        
     }
 
     @FXML

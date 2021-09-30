@@ -99,4 +99,9 @@ public class EstudiantePOJO {
     public void setIdOrigen(int idOrigen) {
         this.idOrigen = idOrigen;
     }
+    
+    @Override
+    public String toString(){
+        return primer_nom +" "+ seg_nom +" "+primer_ape+" "+segundo_ape;
+    }
 }

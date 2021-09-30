@@ -70,6 +70,12 @@ public class EstudiantesFormularioFXML implements Initializable{
         this.txfSegundoNombre.setText(estudiante.getSeg_nom());
         this.txfApellidoPaterno.setText(estudiante.getPrimer_ape());
         this.txfApellidoMaterno.setText(estudiante.getSegundo_ape());
+        
+        if(estudiante.isActivo()){
+            this.chkbEstaActivo.setSelected(true);
+        }else{
+            this.chkbEstaActivo.setSelected(false);
+        }
     }
 
 

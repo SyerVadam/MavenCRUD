@@ -34,7 +34,7 @@ public class EstudianteDAO {
                     e.setIdEstudiante(rs.getInt("idestudiante"));
                     e.setPrimer_nom(rs.getString("primer_nom"));
                     e.setPrimer_ape(rs.getString("primer_ape"));
-                    e.setSeg_nom(rs.getString("seg_nombre"));
+                    e.setSeg_nom(rs.getString("seg_nom"));
                     e.setSegundo_ape(rs.getString("seg_ape"));
                     e.setActivo(rs.getBoolean("activo"));
                     e.setIdColegio(rs.getInt("colegio_idcolegio"));

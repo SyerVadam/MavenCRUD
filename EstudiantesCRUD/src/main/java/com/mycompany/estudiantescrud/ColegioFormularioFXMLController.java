@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import pojo.ColegioPOJO;
 import pojo.EstudiantePOJO;
 
@@ -55,19 +58,29 @@ public class ColegioFormularioFXMLController implements Initializable {
     }
 
     @FXML
-    private void btnGuardar_Click(ActionEvent event) {
+    private void btnGuardar_Click(ActionEvent event) throws Throwable {
         String nombre = this.txfNombre.getText();
         String tipo = this.txfTipo.getText();
         String ciudad = this.txfCiudad.getText();
         
-        if(nombre.isEmpty() || tipo.isEmpty()){
-            System.out.println("Verifique que no haya campos vacíos");
+        if(nombre.isEmpty() || tipo.isEmpty() || ciudad.isEmpty() ){
+            JOptionPane.showMessageDialog(null, "Verifique no haya campos vacios");
         }else{
             ColegioDAO colegioDAO= new ColegioDAO();
             if(esNuevoRegistro){
                 colegioDAO.RegistrarColegio(nombre, tipo, ciudad);
+                JOptionPane.showMessageDialog(null, "Guardado correctamente");
+                
+                Stage stage = (Stage) btnGuardar.getScene().getWindow();
+                stage.close();
+                
             }else{
                 colegioDAO.ActualizarColegio(colegioExistente.getIdColegio(), nombre, tipo, ciudad);
+                JOptionPane.showMessageDialog(null, "Guardado correctamente");
+                
+                Stage stage = (Stage) btnGuardar.getScene().getWindow();
+                stage.close();
+                
             }
                 
         }

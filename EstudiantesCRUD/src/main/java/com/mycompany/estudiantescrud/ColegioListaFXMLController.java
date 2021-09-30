@@ -24,6 +24,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import pojo.ColegioPOJO;
 
 /**
@@ -45,6 +46,8 @@ public class ColegioListaFXMLController implements Initializable {
     private TextField txfColegio;
     @FXML
     private Button btnRegresar;
+    @FXML
+    private Button btnBuscar;
 
     /**
      * Initializes the controller class.
@@ -102,7 +105,7 @@ public class ColegioListaFXMLController implements Initializable {
 
             actualizarListaColegios();
         } else {
-            System.out.println("Debes selccionar un colegio de la lista");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un colegio de la lista");
         }
     }
 
@@ -117,12 +120,8 @@ public class ColegioListaFXMLController implements Initializable {
 
             actualizarListaColegios();
         } else {
-            System.out.println("Debes selccionar un colegio de la lista");
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un colegio de la lista");
         }
-    }
-
-    @FXML
-    private void txfBuscarEstudiante_TextChanged(InputMethodEvent event) {
     }
 
     @FXML
@@ -141,6 +140,22 @@ public class ColegioListaFXMLController implements Initializable {
 
     @FXML
     private void btnProbarConexion_Click(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnBuscar_Click(ActionEvent event) {
+        String buscar = txfColegio.getText();
+        if(buscar.length() != 0){
+            ColegioDAO colegioDAO = new ColegioDAO();
+            this.listvColegio.setItems(colegioDAO.ObtenerColegiosPorNombre(txfColegio.getText()));
+        }else{
+            actualizarListaColegios();
+        }
+    }
+
+    @FXML
+    private void txfColegios_Changed(InputMethodEvent event) {
+        actualizarListaColegios();
     }
     
 }

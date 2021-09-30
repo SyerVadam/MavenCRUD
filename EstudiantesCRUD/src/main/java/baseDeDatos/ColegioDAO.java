@@ -111,4 +111,37 @@ public class ColegioDAO {
         }
     }
     
+    public ObservableList<pojo.ColegioPOJO> ObtenerColegiosPorNombre(String colegio) {
+        ObservableList<pojo.ColegioPOJO> listaColegios = FXCollections.observableArrayList();
+        String consulta = null;
+        try {
+            Connection conn = ConectarBD();
+
+            if (conn != null) {
+                consulta = "SELECT * FROM colegio WHERE nombre= ? ";
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setString(1, colegio);
+                ResultSet rs = ps.executeQuery();
+                
+                while (rs.next() == true) {
+                    pojo.ColegioPOJO c = new pojo.ColegioPOJO();
+                    c.setIdColegio(rs.getInt("idcolegio"));
+                    c.setTipo(rs.getString("tipo"));
+                    c.setCiudad(rs.getString("ciudad"));
+                    c.setNombre(rs.getString("nombre"));
+                    listaColegios.add(c);
+                }
+
+                rs.close();
+                ps.close();
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error de consulta en la base de datos: " + e.getMessage());
+        }
+
+        return listaColegios;
+    }
+    
 }

@@ -1,33 +1,25 @@
-package com.mycompany.estudiantescrud;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package baseDeDatos;
 
+import static baseDeDatos.Conexion.ConectarBD;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import pojo.EstudiantePOJO;
 
-public class BaseDeDatos {
-
-    public Connection ConectarBD() throws SQLException {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/estudiantes?"
-                    + "user=asd"
-                    + "&password=asd");
-
-        } catch (SQLException e) {
-            System.out.println("Error de conexión:  " + e.getMessage());
-        }
-
-        return conn;
-    }
-
-    public ObservableList<EstudiantePOJO> ObtenerEstudiantes() {
-        ObservableList<EstudiantePOJO> listaEstudiantes = FXCollections.observableArrayList();
+/**
+ *
+ * @author israz
+ */
+public class EstudianteDAO {
+    public ObservableList<pojo.EstudiantePOJO> ObtenerEstudiantes() {
+        ObservableList<pojo.EstudiantePOJO> listaEstudiantes = FXCollections.observableArrayList();
         String consulta = null;
         try {
             Connection conn = ConectarBD();
@@ -37,7 +29,7 @@ public class BaseDeDatos {
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    EstudiantePOJO e = new EstudiantePOJO();
+                    pojo.EstudiantePOJO e = new pojo.EstudiantePOJO();
                     e.setIdEstudiante(rs.getInt("idEstudiante"));
                     e.setPrimerNombre(rs.getString("primeroNombre"));
                     e.setSegundoNombre(rs.getString("segundoNombre"));

@@ -1,5 +1,8 @@
 package com.mycompany.estudiantescrud;
 
+import com.mycompany.estudiantescrud.EstudiantesFormularioFXML;
+import baseDeDatos.Conexion;
+import baseDeDatos.EstudianteDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,9 +29,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pojo.EstudiantePOJO;
 
-public class PrimaryController implements Initializable{
+public class EstudiantesListaFXML implements Initializable {
 
-    
     @FXML
     private ListView<EstudiantePOJO> listvEstudiantes;
     @FXML
@@ -39,22 +41,22 @@ public class PrimaryController implements Initializable{
     private Button btnEliminar;
     @FXML
     private TextField txfEstudiante;
-    @FXML
     private Button btnSalir;
-    
-    
+    @FXML
+    private Button btnRegresar;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         listvEstudiantes.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         actualizarListaEstudiantes();
-    }   
-    
-    private void actualizarListaEstudiantes(){
-        BaseDeDatos bd = new BaseDeDatos();
-        this.listvEstudiantes.setItems(bd.ObtenerEstudiantes());
     }
-   
+
+    private void actualizarListaEstudiantes() {
+        EstudianteDAO estudianteDAO = new EstudianteDAO();
+        this.listvEstudiantes.setItems(estudianteDAO.ObtenerEstudiantes());
+    }
+
     @FXML
     private void listvEstudiantes_OnDragEntered(DragEvent event) {
     }
@@ -62,56 +64,55 @@ public class PrimaryController implements Initializable{
     @FXML
     private void btnRegistrar_Click(ActionEvent event) throws IOException {
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("secondary.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("EstudiantesFormularioFXML.fxml"));
         Scene scene = new Scene(root);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Registrar estudiante");
         stage.showAndWait();
-        
+
         actualizarListaEstudiantes();
     }
 
     @FXML
-    private void btnActualizar_Click(ActionEvent event) throws IOException {  
+    private void btnActualizar_Click(ActionEvent event) throws IOException {
         EstudiantePOJO estudiante = new EstudiantePOJO();
-        if(listvEstudiantes.getSelectionModel().getSelectedItem()!=null){
+        if (listvEstudiantes.getSelectionModel().getSelectedItem() != null) {
             estudiante = listvEstudiantes.getSelectionModel().getSelectedItem();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("secondary.fxml"));
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EstudiantesFormularioFXML.fxml"));
             Parent root = loader.load();
-            SecondaryController controlador = loader.getController();
-            
-            controlador.recibirEstudianteActualización(estudiante);  
-            
-            Scene scene= new Scene(root);
+            EstudiantesFormularioFXML controlador = loader.getController();
+
+            controlador.recibirEstudianteActualización(estudiante);
+
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Actualizar estudiante");
             stage.showAndWait();
-            
+
             actualizarListaEstudiantes();
-        }else{
+        } else {
             System.out.println("Debes selccionar un estudiante de la lista");
         }
-        
-        
+
     }
 
     @FXML
     private void btnEliminar_Click(ActionEvent event) {
-        if(listvEstudiantes.getSelectionModel().getSelectedItem()!=null){
+        if (listvEstudiantes.getSelectionModel().getSelectedItem() != null) {
             EstudiantePOJO estudiante = new EstudiantePOJO();
             estudiante = listvEstudiantes.getSelectionModel().getSelectedItem();
-            
-            BaseDeDatos bd = new BaseDeDatos();
-            bd.EliminarEstudiante(estudiante.getIdEstudiante());
-            
+
+            EstudianteDAO estudianteDAO = new EstudianteDAO();
+            estudianteDAO.EliminarEstudiante(estudiante.getIdEstudiante());
+
             actualizarListaEstudiantes();
-        }else{
+        } else {
             System.out.println("Debes selccionar un estudiante de la lista");
         }
     }
@@ -122,18 +123,26 @@ public class PrimaryController implements Initializable{
     }
 
     @FXML
-    private void btnSalir_Click(ActionEvent event) {
-        Stage stage = (Stage) btnSalir.getScene().getWindow();
-        stage.close();
+    private void btnProbarConexion_Click(ActionEvent event) throws SQLException {
+        Conexion conexion = new Conexion();
+        Connection conn = conexion.ConectarBD();
+        if (conn != null) {
+            System.out.println("Conexión establecida");
+        }
     }
 
     @FXML
-    private void btnProbarConexion_Click(ActionEvent event) throws SQLException {
-        BaseDeDatos bd = new BaseDeDatos();
-        Connection conn = bd.ConectarBD();
-        if(conn != null)
-            System.out.println("Conexión establecida");
+    private void btnRegresar_Click(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("MenuPrincipalFXML.fxml"));
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Menu principal");
+        Stage stageActual = (Stage) btnRegresar.getScene().getWindow();
+        stageActual.close();
+        stage.show();
     }
-
 
 }

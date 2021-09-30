@@ -6,8 +6,8 @@ public class EstudiantePOJO {
     private int idEstudiante;
     private String primerNombre;
     private String segundoNombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
+    private String PrimerApellido;
+    private String segundoApellido;
     private boolean estaAprobado;
 
     public EstudiantePOJO() {
@@ -17,8 +17,8 @@ public class EstudiantePOJO {
         this.idEstudiante = idEstudiante;
         this.primerNombre = primerNombre;
         this.segundoNombre = segundoNombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
+        this.PrimerApellido = apellidoPaterno;
+        this.segundoApellido = apellidoMaterno;
         this.estaAprobado = estaAprobado;
     }
 
@@ -47,19 +47,19 @@ public class EstudiantePOJO {
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+        return PrimerApellido;
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+        this.PrimerApellido = apellidoPaterno;
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+        return segundoApellido;
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
+        this.segundoApellido = apellidoMaterno;
     }
 
     public boolean isEstaAprobado() {

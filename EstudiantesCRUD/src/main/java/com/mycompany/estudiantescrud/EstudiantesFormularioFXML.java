@@ -1,5 +1,6 @@
 package com.mycompany.estudiantescrud;
 
+import baseDeDatos.EstudianteDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pojo.EstudiantePOJO;
 
-public class SecondaryController implements Initializable{
+public class EstudiantesFormularioFXML implements Initializable{
 
     @FXML
     private TextField txfPrimerNombre;
@@ -57,11 +58,11 @@ public class SecondaryController implements Initializable{
         if(primerNombre.isEmpty() || apellidoPaterno.isEmpty()){
             System.out.println("Verifique que no haya campos vacíos");
         }else{
-            BaseDeDatos bd = new BaseDeDatos();
+            EstudianteDAO estudianteDAO= new EstudianteDAO();
             if(esNuevoRegistro){
-                bd.RegistrarEstudiante(primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+                estudianteDAO.RegistrarEstudiante(primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
             }else{
-                bd.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
+                estudianteDAO.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno);
             }
                 
         }

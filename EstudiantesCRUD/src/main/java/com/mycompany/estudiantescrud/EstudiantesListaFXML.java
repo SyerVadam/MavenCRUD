@@ -39,11 +39,11 @@ public class EstudiantesListaFXML implements Initializable {
     private Button btnActualizar;
     @FXML
     private Button btnEliminar;
-    @FXML
-    private TextField txfEstudiante;
     private Button btnSalir;
     @FXML
     private Button btnRegresar;
+    @FXML
+    private TextField txfEstudiante;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,10 +57,6 @@ public class EstudiantesListaFXML implements Initializable {
         this.listvEstudiantes.setItems(estudianteDAO.ObtenerEstudiantes());
     }
 
-    @FXML
-    private void listvEstudiantes_OnDragEntered(DragEvent event) {
-        
-    }
 
     @FXML
     private void btnRegistrar_Click(ActionEvent event) throws IOException {

@@ -27,7 +27,9 @@ public class MenuPrincipalFXMLController implements Initializable {
     @FXML
     private Button btnAdministrarEstudiantes;
     @FXML
-    private Button btnHistoriasAcademicas;
+    private Button btnHistoriasAcademicas;  
+    @FXML
+    private Button btnOrigenes;
 
     /**
      * Initializes the controller class.
@@ -56,4 +58,17 @@ public class MenuPrincipalFXMLController implements Initializable {
         
     }
     
+    @FXML
+    private void btnOrigenes_Click(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("OrigenesListaFXML.fxml"));
+        Scene scene = new Scene(root);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("Origenes");
+        Stage stageActual = (Stage) btnOrigenes.getScene().getWindow();
+        stageActual.close();
+        stage.show();
+    }
 }

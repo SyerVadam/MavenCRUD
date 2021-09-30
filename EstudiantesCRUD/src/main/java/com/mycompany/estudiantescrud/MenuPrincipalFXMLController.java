@@ -45,7 +45,7 @@ public class MenuPrincipalFXMLController implements Initializable {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Lista de estudiantes");
+        stage.setTitle("Registrar estudiante");
         Stage stageActual = (Stage) btnAdministrarEstudiantes.getScene().getWindow();
         stageActual.close();
         stage.show();
@@ -54,20 +54,6 @@ public class MenuPrincipalFXMLController implements Initializable {
     @FXML
     private void btnHistoriasAcademicas_Click(ActionEvent event) {
         
-    }
-
-    @FXML
-    private void btnTutores_Click(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("TutorListaFXML.fxml"));
-        Scene scene = new Scene(root);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.setTitle("Lista de tutores");
-        Stage stageActual = (Stage) btnAdministrarEstudiantes.getScene().getWindow();
-        stageActual.close();
-        stage.show();
     }
     
 }

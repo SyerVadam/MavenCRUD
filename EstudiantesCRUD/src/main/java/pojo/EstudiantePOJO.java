@@ -4,22 +4,26 @@ package pojo;
 public class EstudiantePOJO {
     
     private int idEstudiante;
-    private String primerNombre;
-    private String segundoNombre;
-    private String PrimerApellido;
-    private String segundoApellido;
-    private boolean estaAprobado;
+    private String primer_nom;
+    private String primer_ape;
+    private String seg_nom;
+    private String segundo_ape;
+    private boolean activo;
+    private int idColegio;
+    private int idHistorial;
 
     public EstudiantePOJO() {
     }
 
-    public EstudiantePOJO(int idEstudiante, String primerNombre, String segundoNombre, String apellidoPaterno, String apellidoMaterno, boolean estaAprobado) {
+    public EstudiantePOJO(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String segundo_ape, boolean activo, int idColegio, int idHistorial) {
         this.idEstudiante = idEstudiante;
-        this.primerNombre = primerNombre;
-        this.segundoNombre = segundoNombre;
-        this.PrimerApellido = apellidoPaterno;
-        this.segundoApellido = apellidoMaterno;
-        this.estaAprobado = estaAprobado;
+        this.primer_nom = primer_nom;
+        this.primer_ape = primer_ape;
+        this.seg_nom = seg_nom;
+        this.segundo_ape = segundo_ape;
+        this.activo = activo;
+        this.idColegio = idColegio;
+        this.idHistorial = idHistorial;
     }
 
     public int getIdEstudiante() {
@@ -30,45 +34,60 @@ public class EstudiantePOJO {
         this.idEstudiante = idEstudiante;
     }
 
-    public String getPrimerNombre() {
-        return primerNombre;
+    public String getPrimer_nom() {
+        return primer_nom;
     }
 
-    public void setPrimerNombre(String primerNombre) {
-        this.primerNombre = primerNombre;
+    public void setPrimer_nom(String primer_nom) {
+        this.primer_nom = primer_nom;
     }
 
-    public String getSegundoNombre() {
-        return segundoNombre;
+    public String getPrimer_ape() {
+        return primer_ape;
     }
 
-    public void setSegundoNombre(String segundoNombre) {
-        this.segundoNombre = segundoNombre;
+    public void setPrimer_ape(String primer_ape) {
+        this.primer_ape = primer_ape;
     }
 
-    public String getApellidoPaterno() {
-        return PrimerApellido;
+    public String getSeg_nom() {
+        return seg_nom;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.PrimerApellido = apellidoPaterno;
+    public void setSeg_nom(String seg_nom) {
+        this.seg_nom = seg_nom;
     }
 
-    public String getApellidoMaterno() {
-        return segundoApellido;
+    public String getSegundo_ape() {
+        return segundo_ape;
     }
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.segundoApellido = apellidoMaterno;
+    public void setSegundo_ape(String segundo_ape) {
+        this.segundo_ape = segundo_ape;
     }
 
-    public boolean isEstaAprobado() {
-        return estaAprobado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEstaAprobado(boolean estaAprobado) {
-        this.estaAprobado = estaAprobado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
-    
+
+    public int getIdColegio() {
+        return idColegio;
+    }
+
+    public void setIdColegio(int idColegio) {
+        this.idColegio = idColegio;
+    }
+
+    public int getIdHistorial() {
+        return idHistorial;
+    }
+
+    public void setIdHistorial(int idHistorial) {
+        this.idHistorial = idHistorial;
+    }
     
 }

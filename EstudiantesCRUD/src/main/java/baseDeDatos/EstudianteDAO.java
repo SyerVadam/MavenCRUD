@@ -25,16 +25,20 @@ public class EstudianteDAO {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "SELECT * FROM estudiantes";
+                consulta = "SELECT * FROM estudiante";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     pojo.EstudiantePOJO e = new pojo.EstudiantePOJO();
-                    e.setIdEstudiante(rs.getInt("idEstudiante"));
-                    e.setPrimerNombre(rs.getString("primeroNombre"));
-                    e.setSegundoNombre(rs.getString("segundoNombre"));
-                    e.setApellidoPaterno(rs.getString("apellidoPaterno"));
-                    e.setApellidoMaterno(rs.getString("apellidoMaterno"));
+                    e.setIdEstudiante(rs.getInt("idestudiante"));
+                    e.setPrimer_nom(rs.getString("primer_nom"));
+                    e.setPrimer_ape(rs.getString("primer_ape"));
+                    e.setSeg_nom(rs.getString("seg_nombre"));
+                    e.setSegundo_ape(rs.getString("seg_ape"));
+                    e.setActivo(rs.getBoolean("activo"));
+                    e.setIdColegio(rs.getInt("colegio_idcolegio"));
+                    e.setIdHistorial(rs.getInt("historial_idhistorial"));
+                    
                     listaEstudiantes.add(e);
                 }
 

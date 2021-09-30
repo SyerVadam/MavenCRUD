@@ -41,10 +41,10 @@ public class EstudiantesFormularioFXML implements Initializable{
     public void recibirEstudianteActualización(EstudiantePOJO estudiante){
         esNuevoRegistro = false;
         estudianteExistente = estudiante;
-        this.txfPrimerNombre.setText(estudiante.getPrimerNombre());
-        this.txfSegundoNombre.setText(estudiante.getSegundoNombre());
-        this.txfApellidoPaterno.setText(estudiante.getApellidoPaterno());
-        this.txfApellidoMaterno.setText(estudiante.getApellidoMaterno());
+        this.txfPrimerNombre.setText(estudiante.getPrimer_nom());
+        this.txfSegundoNombre.setText(estudiante.getSeg_nom());
+        this.txfApellidoPaterno.setText(estudiante.getPrimer_ape());
+        this.txfApellidoMaterno.setText(estudiante.getSegundo_ape());
     }
 
 

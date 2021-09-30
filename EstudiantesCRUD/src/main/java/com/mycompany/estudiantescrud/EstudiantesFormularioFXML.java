@@ -47,20 +47,31 @@ public class EstudiantesFormularioFXML implements Initializable{
     @FXML
     private ComboBox<ColegioPOJO> cmbColegio;
 
+    ObservableList<OrigenPOJO> origenes;
+    ObservableList<ColegioPOJO> colegios;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        origenes = FXCollections.observableArrayList();
+        colegios = FXCollections.observableArrayList();
+        
         estudianteExistente = new EstudiantePOJO();
+        cargarCmbOrigen();
+        cargarCmbColegio();
+
     }   
     
     public void cargarCmbOrigen(){
         OrigenDAO origenDAO = new OrigenDAO();
-        cmbOrigen.setItems(origenDAO.ObtenerOrigenes());
+        origenes = origenDAO.ObtenerOrigenes();
+        cmbOrigen.setItems(origenes);
+        
     }
     
     public void cargarCmbColegio(){
         ColegioDAO colegioDAO = new ColegioDAO();
-        cmbColegio.setItems(colegioDAO.ObtenerColegios());
+        colegios = colegioDAO.ObtenerColegios();
+        cmbColegio.setItems(colegios);
     }
     
     public void recibirEstudianteActualización(EstudiantePOJO estudiante){
@@ -70,12 +81,46 @@ public class EstudiantesFormularioFXML implements Initializable{
         this.txfSegundoNombre.setText(estudiante.getSeg_nom());
         this.txfApellidoPaterno.setText(estudiante.getPrimer_ape());
         this.txfApellidoMaterno.setText(estudiante.getSegundo_ape());
+        this.txfHistorial.setText(estudiante.getHistorial());
         
         if(estudiante.isActivo()){
             this.chkbEstaActivo.setSelected(true);
         }else{
             this.chkbEstaActivo.setSelected(false);
         }
+        
+        this.cmbColegio.valueProperty().setValue(mostrarSeleccionadoCmbColegio(estudianteExistente.getIdColegio()));
+        this.cmbOrigen.valueProperty().setValue(mostrarSeleccionadoCmbOrigen(estudianteExistente.getIdOrigen()));
+    }
+    
+    public ColegioPOJO mostrarSeleccionadoCmbColegio(int idColegio){
+        ColegioPOJO colegio = new ColegioPOJO();
+        int index = 0;
+        boolean bucle = true;
+        while(bucle){
+            colegio = colegios.get(index);
+            
+            if(idColegio == colegio.getIdColegio())
+                return colegio;
+           
+            index++;
+        }
+        return colegio;
+    }
+    
+    public OrigenPOJO mostrarSeleccionadoCmbOrigen(int idOrigen){
+        OrigenPOJO origen = new OrigenPOJO();
+        int index = 0;
+        boolean bucle = true;
+        while(bucle){
+            origen = origenes.get(index);
+            
+            if(idOrigen == origen.getIdOrigen())
+                return origen;
+           
+            index++;
+        }
+        return origen;
     }
 
 

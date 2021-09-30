@@ -98,4 +98,9 @@ public class TutorPOJO {
         this.idEstudiante = idEstudiante;
     }
     
+    @Override
+    public String toString(){
+        return nom_madre + " y " + nom_padre;
+    }
+    
 }

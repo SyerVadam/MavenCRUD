@@ -94,7 +94,7 @@ public class EstudianteDAO {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "UPDATE estudiantes "
+                consulta = "UPDATE estudiante "
                         + "SET primer_nom=?, primer_ape=?, seg_nom=?, seg_ape=?, activo=?, colegio_idcolegio=?, historial=?, origen_idorigen=? "
                         + "WHERE idestudiante = " + idEstudiante;
                 PreparedStatement ps = conn.prepareStatement(consulta);

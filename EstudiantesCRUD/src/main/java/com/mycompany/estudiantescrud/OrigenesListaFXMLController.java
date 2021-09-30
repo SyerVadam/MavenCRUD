@@ -141,10 +141,15 @@ public class OrigenesListaFXMLController implements Initializable {
         stageActual.close();
         stage.show();
     }
-
+    
     @FXML
     private void btnBuscar_Click(ActionEvent event) {
-        OrigenDAO origenDAO = new OrigenDAO();
-        this.listvOrigenes.setItems(origenDAO.ObtenerOrigenesPorEstado(txfOrigen.getText()));
-    } 
+        String buscar = txfOrigen.getText();
+        if(buscar.length() != 0){
+            OrigenDAO origenDAO = new OrigenDAO();
+            this.listvOrigenes.setItems(origenDAO.ObtenerOrigenesPorEstado(txfOrigen.getText()));
+        }else{
+            actualizarListaOrigenes();
+        }
+    }
 }

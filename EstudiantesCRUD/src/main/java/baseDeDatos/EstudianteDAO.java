@@ -37,7 +37,7 @@ public class EstudianteDAO {
                     e.setSegundo_ape(rs.getString("seg_ape"));
                     e.setActivo(rs.getBoolean("activo"));
                     e.setIdColegio(rs.getInt("colegio_idcolegio"));
-                    e.setIdHistorial(rs.getInt("historial_idhistorial"));
+                    e.setHistorial(rs.getString("historial_idhistorial"));
                     
                     listaEstudiantes.add(e);
                 }

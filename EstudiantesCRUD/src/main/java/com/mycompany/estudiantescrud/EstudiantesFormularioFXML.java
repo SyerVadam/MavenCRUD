@@ -140,7 +140,7 @@ public class EstudiantesFormularioFXML implements Initializable{
         OrigenPOJO origen = new OrigenPOJO();
         origen = this.cmbOrigen.getSelectionModel().getSelectedItem();
         
-        if(primer_nom.isEmpty() || primer_ape.isEmpty()){
+        if(primer_nom.isEmpty() || primer_ape.isEmpty() || colegio == null || origen == null || historial.isEmpty()){
             System.out.println("Verifique que no haya campos vacíos");
         }else{
             EstudianteDAO estudianteDAO= new EstudianteDAO();
@@ -149,6 +149,9 @@ public class EstudiantesFormularioFXML implements Initializable{
             }else{
                 estudianteDAO.ActualizarEstudiante(estudianteExistente.getIdEstudiante(), primer_nom, primer_ape, seg_nom, seg_ape, activo, colegio.getIdColegio(), historial, origen.getIdOrigen());
             }
+            Stage stage = (Stage) btnGuardar.getScene().getWindow();
+            System.out.println("Modulo de registro concluido");
+            stage.close();
         }
     }
 

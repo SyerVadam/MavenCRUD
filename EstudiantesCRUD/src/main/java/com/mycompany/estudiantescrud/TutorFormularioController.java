@@ -124,6 +124,9 @@ public class TutorFormularioController implements Initializable {
         }else{
             tutorDAO.ActualizarTutor(idTutor, idEstudiante, ident_madre, ident_padre, nom_madre, nom_padre, direc_elec, telefono, telefono2);
         }
+        Stage stage = (Stage) btnGuardar.getScene().getWindow();
+        System.out.println("Modulo de registro concluido");
+        stage.close();
     }
 
     @FXML

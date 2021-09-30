@@ -46,4 +46,9 @@ public class OrigenPOJO {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+   
+    @Override
+    public String toString(){
+        return estado + ciudad;
+    }
 }

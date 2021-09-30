@@ -31,6 +31,7 @@ import pojo.EstudiantePOJO;
 
 public class EstudiantesListaFXML implements Initializable {
 
+    @FXML
     private ListView<EstudiantePOJO> listvEstudiantes;
     @FXML
     private Label lblPruebaSQL;
@@ -42,11 +43,7 @@ public class EstudiantesListaFXML implements Initializable {
     @FXML
     private Button btnRegresar;
     @FXML
-    private ListView<?> listvOrigenes;
-    @FXML
-    private Button btnRegistrar;
-    @FXML
-    private TextField txfOrigen;
+    private TextField txfEstudiante;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,6 +119,7 @@ public class EstudiantesListaFXML implements Initializable {
         //consulta
     }
 
+    @FXML
     private void btnProbarConexion_Click(ActionEvent event) throws SQLException {
         Conexion conexion = new Conexion();
         Connection conn = conexion.ConectarBD();

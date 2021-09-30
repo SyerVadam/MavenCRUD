@@ -31,7 +31,6 @@ import pojo.EstudiantePOJO;
 
 public class EstudiantesListaFXML implements Initializable {
 
-    @FXML
     private ListView<EstudiantePOJO> listvEstudiantes;
     @FXML
     private Label lblPruebaSQL;
@@ -39,11 +38,15 @@ public class EstudiantesListaFXML implements Initializable {
     private Button btnActualizar;
     @FXML
     private Button btnEliminar;
-    @FXML
-    private TextField txfEstudiante;
     private Button btnSalir;
     @FXML
     private Button btnRegresar;
+    @FXML
+    private ListView<?> listvOrigenes;
+    @FXML
+    private Button btnRegistrar;
+    @FXML
+    private TextField txfOrigen;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -57,10 +60,6 @@ public class EstudiantesListaFXML implements Initializable {
         this.listvEstudiantes.setItems(estudianteDAO.ObtenerEstudiantes());
     }
 
-    @FXML
-    private void listvEstudiantes_OnDragEntered(DragEvent event) {
-        
-    }
 
     @FXML
     private void btnRegistrar_Click(ActionEvent event) throws IOException {
@@ -123,7 +122,6 @@ public class EstudiantesListaFXML implements Initializable {
         //consulta
     }
 
-    @FXML
     private void btnProbarConexion_Click(ActionEvent event) throws SQLException {
         Conexion conexion = new Conexion();
         Connection conn = conexion.ConectarBD();

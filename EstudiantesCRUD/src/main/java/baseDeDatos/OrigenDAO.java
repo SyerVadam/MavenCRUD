@@ -131,4 +131,21 @@ public class OrigenDAO {
             System.out.println("Error de actualización en la base de datos: " + e.getMessage());
         }
     }
+    
+    public void EliminarOrigen(int idOrigen) {
+        String consulta;
+        try {
+            Connection conn = ConectarBD();
+            if (conn != null) {
+                consulta = "DELETE FROM origen WHERE idorigen = " + idOrigen;
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.executeUpdate();
+                
+                ps.close();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error de eliminación en la base de datos: " + e.getMessage());
+        }
+    }
 }

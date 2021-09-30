@@ -22,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.InputMethodEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import pojo.EstudiantePOJO;
 import pojo.OrigenPOJO;
 
 /**
@@ -94,12 +96,27 @@ public class OrigenesListaFXMLController implements Initializable {
 
             actualizarListaOrigenes();
         } else {
-            System.out.println("Debes selccionar un estudiante de la lista");
+            JOptionPane.showMessageDialog(null, "Seleccione un origen de la lista");
         }
     }
 
     @FXML
     private void btnEliminar_Click(ActionEvent event) {
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Seguro que desea eliminarlo?");
+        
+        if (listvOrigenes.getSelectionModel().getSelectedItem() != null) {
+            OrigenPOJO origen = new OrigenPOJO();
+            origen = listvOrigenes.getSelectionModel().getSelectedItem();
+
+            if(confirmacion == 0){
+                OrigenDAO origenDAO = new OrigenDAO();
+                origenDAO.EliminarOrigen(origen.getIdOrigen());
+            }
+
+            actualizarListaOrigenes();
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un origen de la lista");
+        }
     }
 
     @FXML

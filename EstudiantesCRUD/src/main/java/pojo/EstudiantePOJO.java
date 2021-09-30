@@ -10,12 +10,13 @@ public class EstudiantePOJO {
     private String segundo_ape;
     private boolean activo;
     private int idColegio;
-    private int idHistorial;
+    private String idHistorial;
+    private int idorigen;
 
     public EstudiantePOJO() {
     }
 
-    public EstudiantePOJO(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String segundo_ape, boolean activo, int idColegio, int idHistorial) {
+    public EstudiantePOJO(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String segundo_ape, boolean activo, int idColegio, String idHistorial, int idorigen) {
         this.idEstudiante = idEstudiante;
         this.primer_nom = primer_nom;
         this.primer_ape = primer_ape;
@@ -24,6 +25,7 @@ public class EstudiantePOJO {
         this.activo = activo;
         this.idColegio = idColegio;
         this.idHistorial = idHistorial;
+        this.idorigen = idorigen;
     }
 
     public int getIdEstudiante() {
@@ -82,12 +84,25 @@ public class EstudiantePOJO {
         this.idColegio = idColegio;
     }
 
-    public int getIdHistorial() {
+    public String getIdHistorial() {
         return idHistorial;
     }
 
-    public void setIdHistorial(int idHistorial) {
+    public void setIdHistorial(String idHistorial) {
         this.idHistorial = idHistorial;
     }
+
+
+
+    public void setIdorigen(int idorigen) {
+        this.idorigen = idorigen;
+    }
+
+    
+    @Override
+    public String toString() {
+        return "ID" + idEstudiante + ", Nombre: " + primer_nom + " " + primer_ape;
+    }
+    
     
 }

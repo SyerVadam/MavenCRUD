@@ -12,14 +12,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pojo.EstudiantePOJO;
 
 /**
  *
  * @author israz
  */
 public class EstudianteDAO {
-    public ObservableList<pojo.EstudiantePOJO> ObtenerEstudiantes() {
-        ObservableList<pojo.EstudiantePOJO> listaEstudiantes = FXCollections.observableArrayList();
+    
+    public ObservableList<EstudiantePOJO> ObtenerEstudiantes() {
+        ObservableList<EstudiantePOJO> listaEstudiantes = FXCollections.observableArrayList();
         String consulta = null;
         try {
             Connection conn = ConectarBD();
@@ -29,15 +31,16 @@ public class EstudianteDAO {
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    pojo.EstudiantePOJO e = new pojo.EstudiantePOJO();
+                    EstudiantePOJO e = new EstudiantePOJO();
                     e.setIdEstudiante(rs.getInt("idestudiante"));
                     e.setPrimer_nom(rs.getString("primer_nom"));
                     e.setPrimer_ape(rs.getString("primer_ape"));
-                    e.setSeg_nom(rs.getString("seg_nombre"));
+                    e.setSeg_nom(rs.getString("seg_nom"));
                     e.setSegundo_ape(rs.getString("seg_ape"));
                     e.setActivo(rs.getBoolean("activo"));
                     e.setIdColegio(rs.getInt("colegio_idcolegio"));
-                    e.setIdHistorial(rs.getInt("historial_idhistorial"));
+                    e.setIdHistorial(rs.getString("historial"));
+                    e.setIdorigen(rs.getInt("origen_idorigen"));
                     
                     listaEstudiantes.add(e);
                 }

@@ -40,10 +40,9 @@ public class EstudiantesListaFXML implements Initializable {
     @FXML
     private Button btnEliminar;
     @FXML
-    private TextField txfEstudiante;
-    private Button btnSalir;
-    @FXML
     private Button btnRegresar;
+    @FXML
+    private TextField txfEstudiante;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

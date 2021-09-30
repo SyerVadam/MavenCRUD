@@ -81,7 +81,7 @@ public class OrigenesListaFXMLController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("OrigenFormularioFXML.fxml"));
             Parent root = loader.load();
             OrigenFormularioControllerFXML controlador = loader.getController();
-            controlador.setDatos(origenSeleccionado.getEstado(), origenSeleccionado.getCiudad());
+            controlador.setDatos(origenSeleccionado);
 
 
             Scene scene = new Scene(root);
@@ -89,7 +89,7 @@ public class OrigenesListaFXMLController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.setTitle("Actualizar estudiante");
+            stage.setTitle("Actualizar origen");
             stage.showAndWait();
 
             actualizarListaOrigenes();

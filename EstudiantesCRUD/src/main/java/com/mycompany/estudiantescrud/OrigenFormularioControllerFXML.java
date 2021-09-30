@@ -32,6 +32,7 @@ public class OrigenFormularioControllerFXML implements Initializable {
     private Button btnCancelar;
     
     private OrigenPOJO origenSeleccionado;
+    private boolean datosModificados;
 
     /**
      * Initializes the controller class.
@@ -41,9 +42,12 @@ public class OrigenFormularioControllerFXML implements Initializable {
         // TODO
     }
 
-    public void setDatos(String estado, String ciudad){
-        txfEstado.setText(estado);
-        txfCiudad.setText(ciudad);
+    public void setDatos(OrigenPOJO origen){
+        origenSeleccionado = origen;
+        txfEstado.setText(origen.getEstado());
+        txfCiudad.setText(origen.getCiudad());
+        this.datosModificados = true;
+        
     }
 
     @FXML
@@ -56,10 +60,17 @@ public class OrigenFormularioControllerFXML implements Initializable {
         }else{
             OrigenDAO origenDAO= new OrigenDAO();
             if(!origenDAO.ExisteOrigen(estado, ciudad)){
-                OrigenDAO.RegistrarOrigen(estado, ciudad);
-                System.out.println("¡Registro exitoso!");
-                Stage stage = (Stage) btnCancelar.getScene().getWindow();
-                stage.close();
+                if(datosModificados == true){
+                    OrigenDAO.ActualizarOrigen(origenSeleccionado.getIdOrigen() ,txfEstado.getText(), txfCiudad.getText());
+                    System.out.println("¡Actualización exitosa!");
+                    Stage stage = (Stage) btnCancelar.getScene().getWindow();
+                    stage.close();   
+                }else{
+                    OrigenDAO.RegistrarOrigen(estado, ciudad);
+                    System.out.println("¡Registro exitoso!");
+                    Stage stage = (Stage) btnCancelar.getScene().getWindow();
+                    stage.close();   
+                }
             }else{
                 System.out.println("Ya existe ese origen");
             }

@@ -109,4 +109,26 @@ public class OrigenDAO {
 
         return false;
     }
+    
+    public static void ActualizarOrigen(int idOrigen, String estado, String ciudad) {
+        String consulta;
+
+        try {
+            Connection conn = ConectarBD();
+
+            if (conn != null) {
+                consulta = "UPDATE origen SET estado=?, ciudad=? WHERE idorigen = " + idOrigen;
+                PreparedStatement ps = conn.prepareStatement(consulta);
+                ps.setString(1, estado);
+                ps.setString(2, ciudad);
+
+                ps.executeUpdate();
+                ps.close();
+                conn.close();
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error de actualización en la base de datos: " + e.getMessage());
+        }
+    }
 }

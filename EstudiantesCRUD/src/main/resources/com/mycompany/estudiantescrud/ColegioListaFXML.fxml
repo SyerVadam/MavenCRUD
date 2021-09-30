@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="com.mycompany.estudiantescrud.ColegioListaFXMLController">
+   <children>
+      <ListView fx:id="listvColegio" layoutX="41.0" layoutY="69.0" onDragEntered="#listvEstudiantes_OnDragEntered" prefHeight="311.0" prefWidth="305.0" />
+      <Label fx:id="lblPruebaSQL" layoutX="41.0" layoutY="44.0" text="Colegios" />
+      <Button layoutX="395.0" layoutY="140.0" mnemonicParsing="false" onAction="#btnRegistrar_Click" prefHeight="28.0" prefWidth="154.0" style="-fx-background-color: #1FA833;" text="Registrar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnActualizar" layoutX="395.0" layoutY="196.0" mnemonicParsing="false" onAction="#btnActualizar_Click" prefHeight="28.0" prefWidth="154.0" style="-fx-background-color: #1C67BD;" text="Actualizar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnEliminar" layoutX="395.0" layoutY="250.0" mnemonicParsing="false" onAction="#btnEliminar_Click" prefHeight="28.0" prefWidth="154.0" style="-fx-background-color: #A01C1C;" text="Eliminar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txfColegio" layoutX="369.0" layoutY="69.0" onInputMethodTextChanged="#txfBuscarEstudiante_TextChanged" prefHeight="25.0" prefWidth="180.0" />
+      <Button fx:id="btnRegresar" layoutX="474.0" layoutY="355.0" mnemonicParsing="false" onAction="#btnRegresar_Click" prefHeight="25.0" prefWidth="75.0" text="Regresar" />
+      <Label layoutX="373.0" layoutY="44.0" text="Buscar estudiante" />
+      <Button layoutX="446.0" layoutY="317.0" mnemonicParsing="false" onAction="#btnProbarConexion_Click" text="Probar conexión" />
+   </children>
+</AnchorPane>

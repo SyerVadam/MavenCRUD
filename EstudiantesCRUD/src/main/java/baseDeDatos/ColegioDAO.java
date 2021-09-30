@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package baseDeDatos;
 
 import static baseDeDatos.Conexion.ConectarBD;
@@ -12,35 +8,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pojo.ColegioPOJO;
 
 /**
  *
- * @author israz
+ * @author dltun
  */
-public class EstudianteDAO {
-    public ObservableList<pojo.EstudiantePOJO> ObtenerEstudiantes() {
-        ObservableList<pojo.EstudiantePOJO> listaEstudiantes = FXCollections.observableArrayList();
+public class ColegioDAO {
+
+    public ObservableList<pojo.ColegioPOJO> ObtenerColegios() {
+        ObservableList<pojo.ColegioPOJO> listaColegios = FXCollections.observableArrayList();
         String consulta = null;
         try {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "SELECT * FROM estudiante";
+                consulta = "SELECT * FROM colegio";
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    pojo.EstudiantePOJO e = new pojo.EstudiantePOJO();
-                    e.setIdEstudiante(rs.getInt("idestudiante"));
-                    e.setPrimer_nom(rs.getString("primer_nom"));
-                    e.setPrimer_ape(rs.getString("primer_ape"));
-                    e.setSeg_nom(rs.getString("seg_nombre"));
-                    e.setSegundo_ape(rs.getString("seg_ape"));
-                    e.setActivo(rs.getBoolean("activo"));
-                    e.setIdColegio(rs.getInt("colegio_idcolegio"));
-                    e.setHistorial(rs.getString("historial"));
-                    e.setIdOrigen(rs.getInt("origen_idorigen"));
-                    
-                    listaEstudiantes.add(e);
+                    pojo.ColegioPOJO c = new pojo.ColegioPOJO();
+                    c.setIdColegio(rs.getInt("idcolegio"));
+                    c.setTipo(rs.getString("tipo"));
+                    c.setCiudad(rs.getString("ciudad"));
+                    c.setNombre(rs.getString("nombre"));
+
+                    listaColegios.add(c);
                 }
 
                 rs.close();
@@ -52,22 +45,21 @@ public class EstudianteDAO {
             System.out.println("Error de consulta en la base de datos: " + e.getMessage());
         }
 
-        return listaEstudiantes;
+        return listaColegios;
     }
-
-    public void RegistrarEstudiante(String primer_nom, String primer_ape, String seg_nom, String seg_ape) {
+    
+    public void RegistrarColegio(String nombre, String tipo, String ciudad) {
         String consulta;
 
         try {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "INSERT INTO estudiante (primer_nom, primer_ape, seg_nom, seg_ape) VALUES (?, ?, ?, ?)";
+                consulta = "INSERT INTO colegio (tipo, ciudad, nombre) VALUES (?, ?, ?)";
                 PreparedStatement ps = conn.prepareStatement(consulta);
-                ps.setString(1, primer_nom);
-                ps.setString(2, primer_ape);
-                ps.setString(3, seg_nom);
-                ps.setString(4, seg_ape);
+                ps.setString(1, tipo);
+                ps.setString(2, ciudad);
+                ps.setString(3, nombre);
 
                 ps.executeUpdate();
                 ps.close();
@@ -78,20 +70,19 @@ public class EstudianteDAO {
             System.out.println("Error de registro en la base de datos: " + e.getMessage());
         }
     }
-
-    public void ActualizarEstudiante(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String seg_ape) {
+    
+    public void ActualizarColegio(int idColegio, String nombre, String tipo, String ciudad) {
         String consulta;
 
         try {
             Connection conn = ConectarBD();
 
             if (conn != null) {
-                consulta = "UPDATE estudiantes SET primer_nom=?, primer_ape=?, seg_nom=?, seg_ape=? WHERE idestudiante = " + idEstudiante;
+                consulta = "UPDATE colegio SET tipo=?, ciudad=?, nombre=? WHERE idcolegio = " + idColegio;
                 PreparedStatement ps = conn.prepareStatement(consulta);
-                ps.setString(1, primer_nom);
-                ps.setString(2, primer_ape);
-                ps.setString(3, seg_nom);
-                ps.setString(4, seg_ape);
+                ps.setString(1, tipo);
+                ps.setString(2, ciudad);
+                ps.setString(3, nombre);
 
                 ps.executeUpdate();
                 ps.close();
@@ -102,13 +93,13 @@ public class EstudianteDAO {
             System.out.println("Error de actualización en la base de datos: " + e.getMessage());
         }
     }
-
-    public void EliminarEstudiante(int idEstudiante) {
+    
+    public void EliminarColegio(int idColegio) {
         String consulta;
         try {
             Connection conn = ConectarBD();
             if (conn != null) {
-                consulta = "DELETE FROM estudiante WHERE idestudiante = " + idEstudiante;
+                consulta = "DELETE FROM colegio WHERE idcolegio = " + idColegio;
                 PreparedStatement ps = conn.prepareStatement(consulta);
                 ps.executeUpdate();
                 
@@ -119,4 +110,5 @@ public class EstudianteDAO {
             System.out.println("Error de eliminación en la base de datos: " + e.getMessage());
         }
     }
+    
 }

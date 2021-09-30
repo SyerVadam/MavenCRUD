@@ -1,4 +1,3 @@
-
 package pojo;
 
 public class EstudiantePOJO {
@@ -10,12 +9,13 @@ public class EstudiantePOJO {
     private String segundo_ape;
     private boolean activo;
     private int idColegio;
-    private int idHistorial;
+    private String historial;
+    private int idOrigen;
 
     public EstudiantePOJO() {
     }
 
-    public EstudiantePOJO(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String segundo_ape, boolean activo, int idColegio, int idHistorial) {
+    public EstudiantePOJO(int idEstudiante, String primer_nom, String primer_ape, String seg_nom, String segundo_ape, boolean activo, int idColegio, String historial, int idOrigen) {
         this.idEstudiante = idEstudiante;
         this.primer_nom = primer_nom;
         this.primer_ape = primer_ape;
@@ -23,7 +23,8 @@ public class EstudiantePOJO {
         this.segundo_ape = segundo_ape;
         this.activo = activo;
         this.idColegio = idColegio;
-        this.idHistorial = idHistorial;
+        this.historial = historial;
+        this.idOrigen = idOrigen;
     }
 
     public int getIdEstudiante() {
@@ -82,12 +83,19 @@ public class EstudiantePOJO {
         this.idColegio = idColegio;
     }
 
-    public int getIdHistorial() {
-        return idHistorial;
+    public String getHistorial() {
+        return historial;
     }
 
-    public void setIdHistorial(int idHistorial) {
-        this.idHistorial = idHistorial;
+    public void setHistorial(String historial) {
+        this.historial = historial;
     }
-    
+
+    public int getIdOrigen() {
+        return idOrigen;
+    }
+
+    public void setIdOrigen(int idOrigen) {
+        this.idOrigen = idOrigen;
+    }
 }
